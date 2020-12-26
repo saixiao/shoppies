@@ -116,9 +116,6 @@ class TransferList extends React.Component {
     const { right, left } = this.state;
     const { classes } = this.props;
 
-    console.log(this.state);
-    console.log(this.rightChecked());
-
     return (
       <Grid
         container
