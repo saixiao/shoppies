@@ -1,15 +1,41 @@
 import _ from "lodash";
-import createAction from "./base";
 import actionTypes from "../actionTypes";
 import request from "../../util/request";
 
 export const fetchMoviesByTitle = (title) => {
-  return createAction(actionTypes.movies.SHOW, request.get(`?t=${title}`));
+  return function (dispatch) {
+    request
+      .get(`?s=${title}`)
+      .then((data) =>
+        dispatch({
+          type: actionTypes.movies.UPDATE,
+          payload: data,
+        })
+      )
+      .catch((error) =>
+        dispatch({
+          type: "",
+          payload: error,
+        })
+      );
+  };
 };
 
 export const fetchMoviesByTitleAndYear = (title, year) => {
-  return createAction(
-    actionTypes.movies.SHOW,
-    request.get(`?t=${title}&y=${year}`)
-  );
+  return function (dispatch) {
+    request
+      .get(request.get(`?s=${title}&y=${year}`))
+      .then((data) =>
+        dispatch({
+          type: actionTypes.movies.UPDATE,
+          payload: data,
+        })
+      )
+      .catch((error) =>
+        dispatch({
+          type: "",
+          payload: error,
+        })
+      );
+  };
 };

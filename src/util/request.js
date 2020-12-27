@@ -4,6 +4,8 @@ import qs from "qs";
 
 const baseUrl = "http://www.omdbapi.com";
 
+const apiKey = "&apikey=29dc1524";
+
 const parseResponse = (response) => {
   const data = _.get(response, "data", {});
   if (_.has(data, ["payload"])) {
@@ -20,7 +22,7 @@ export const request = (method) => (query, options = {}) => {
 
   return axios({
     method,
-    url: `${baseUrl}/${query}`,
+    url: `${baseUrl}/${query}${apiKey}`,
     timeout: 60 * 1000,
     paramsSerializer: function (params) {
       return qs.stringify(params, { arrayFormat: "brackets" });
