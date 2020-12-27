@@ -2,11 +2,7 @@ import _ from "lodash";
 
 import actionTypes from "../actionTypes";
 
-const initialState = {
-  movies: [],
-};
-
-export default ($$state = initialState, action) => {
+export default ($$state = [], action) => {
   const { type, payload } = action;
   switch (type) {
     case actionTypes.movies.UPDATE:

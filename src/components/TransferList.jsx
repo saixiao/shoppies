@@ -27,10 +27,16 @@ class TransferList extends React.Component {
     const { left, right, checked } = this.props;
 
     this.state = {
-      left: left || [1, 2, 3, 4],
-      right: right || [5, 6, 7, 8],
+      left: left || [],
+      right: right || [],
       checked: checked || [],
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.left !== this.props.left) {
+      this.setState({ left: this.props.left });
+    }
   }
 
   leftChecked = () => {
@@ -84,25 +90,28 @@ class TransferList extends React.Component {
     return (
       <Paper className={classes.paper}>
         <List dense component="div" role="list">
-          {items.map((value) => {
-            const labelId = `transfer-list-item-${value}-label`;
+          {items.map((movie, i) => {
+            const labelId = `transfer-list-item-${movie}-label`;
 
             return (
               <ListItem
-                key={value}
+                key={i}
                 role="listitem"
                 button
-                onClick={this.handleToggle(value)}
+                onClick={this.handleToggle(movie)}
               >
                 <ListItemIcon>
                   <Checkbox
-                    checked={checked.indexOf(value) !== -1}
+                    checked={checked.indexOf(movie) !== -1}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+                <ListItemText
+                  id={labelId}
+                  primary={`${movie.Title} (${movie.Year})`}
+                />
               </ListItem>
             );
           })}
@@ -114,7 +123,10 @@ class TransferList extends React.Component {
 
   render() {
     const { right, left } = this.state;
-    const { classes } = this.props;
+    const { classes, maxNomSize = 5 } = this.props;
+    const leftChecked = this.leftChecked();
+
+    console.log(this.state);
 
     return (
       <Grid
@@ -132,7 +144,10 @@ class TransferList extends React.Component {
               size="small"
               className={classes.button}
               onClick={this.handleCheckedRight}
-              disabled={this.leftChecked().length === 0}
+              disabled={
+                leftChecked.length === 0 ||
+                right.length + leftChecked.length > maxNomSize
+              }
               aria-label="move selected right"
             >
               &gt;
