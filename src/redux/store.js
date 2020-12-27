@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default (props) => {
+const store = (props) => {
   const middlewares = [thunkMiddleware];
 
   const composedStore = composeEnhancers(applyMiddleware(...middlewares));
@@ -15,3 +15,5 @@ export default (props) => {
 
   return storeCreator(rootReducer, data);
 };
+
+export default store;

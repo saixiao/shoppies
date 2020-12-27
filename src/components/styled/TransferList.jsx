@@ -9,9 +9,32 @@ import {
   Button,
   Paper,
   withStyles,
+  Box,
+  Typography,
 } from "@material-ui/core/";
 
-const styles = { list: { marginLeft: "10px" } };
+const styles = {
+  root: {
+    margin: "auto",
+  },
+  paper: {
+    width: "300px",
+    height: "400px",
+    overflow: "auto",
+  },
+  button: {
+    margin: "2rem",
+  },
+  listHeader: {
+    height: "4rem",
+    backgroundColor: "#008060",
+  },
+  listTitle: {
+    color: "white",
+    textAlign: "left",
+    padding: "1rem",
+  },
+};
 
 const not = (a, b) => {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -83,50 +106,55 @@ class TransferList extends React.Component {
     this.setState({ checked: newChecked });
   };
 
-  customList = (items) => {
+  customList = (items, title) => {
     const { checked } = this.state;
     const { classes } = this.props;
 
     return (
-      <Paper className={classes.paper}>
-        <List dense component="div" role="list">
-          {items.map((movie, i) => {
-            const labelId = `transfer-list-item-${movie}-label`;
+      <Box>
+        <Box className={classes.listHeader}>
+          <Typography className={classes.listTitle} variant="h6">
+            {title}
+          </Typography>
+        </Box>
 
-            return (
-              <ListItem
-                key={i}
-                role="listitem"
-                button
-                onClick={this.handleToggle(movie)}
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    checked={checked.indexOf(movie) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
+        <Paper className={classes.paper}>
+          <List dense component="div" role="list">
+            {items.map((movie, i) => {
+              const labelId = `transfer-list-item-${movie}-label`;
+              return (
+                <ListItem
+                  key={i}
+                  role="listitem"
+                  button
+                  onClick={this.handleToggle(movie)}
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={checked.indexOf(movie) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                      inputProps={{ "aria-labelledby": labelId }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    id={labelId}
+                    primary={`${movie.Title} (${movie.Year})`}
                   />
-                </ListItemIcon>
-                <ListItemText
-                  id={labelId}
-                  primary={`${movie.Title} (${movie.Year})`}
-                />
-              </ListItem>
-            );
-          })}
-          <ListItem />
-        </List>
-      </Paper>
+                </ListItem>
+              );
+            })}
+            <ListItem />
+          </List>
+        </Paper>
+      </Box>
     );
   };
 
   render() {
     const { right, left } = this.state;
-    const { classes, maxNomSize = 5 } = this.props;
+    const { classes, leftTitle, rightTitle, maxNomSize = 5 } = this.props;
     const leftChecked = this.leftChecked();
-
-    console.log(this.state);
 
     return (
       <Grid
@@ -136,7 +164,7 @@ class TransferList extends React.Component {
         alignItems="center"
         className={classes.root}
       >
-        <Grid item>{this.customList(left)}</Grid>
+        <Grid item>{this.customList(left, leftTitle)}</Grid>
         <Grid item>
           <Grid container direction="column" alignItems="center">
             <Button
@@ -164,7 +192,7 @@ class TransferList extends React.Component {
             </Button>
           </Grid>
         </Grid>
-        <Grid item>{this.customList(right)}</Grid>
+        <Grid item>{this.customList(right, rightTitle)}</Grid>
       </Grid>
     );
   }

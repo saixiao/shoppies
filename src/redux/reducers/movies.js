@@ -2,7 +2,7 @@ import _ from "lodash";
 
 import actionTypes from "../actionTypes";
 
-export default ($$state = [], action) => {
+const movieReducer = ($$state = [], action) => {
   const { type, payload } = action;
   switch (type) {
     case actionTypes.movies.UPDATE:
@@ -12,3 +12,5 @@ export default ($$state = [], action) => {
       return $$state;
   }
 };
+
+export default movieReducer;

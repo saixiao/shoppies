@@ -1,4 +1,3 @@
-import _ from "lodash";
 import actionTypes from "../actionTypes";
 import request from "../../util/request";
 
