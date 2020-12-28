@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import {
   Grid,
   List,
@@ -59,6 +60,8 @@ class TransferList extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.left !== this.props.left) {
       this.setState({ left: this.props.left });
+    } else if (prevProps.right !== this.props.right) {
+      this.setState({ right: this.props.right });
     }
   }
 
@@ -104,6 +107,18 @@ class TransferList extends React.Component {
     }
 
     this.setState({ checked: newChecked });
+  };
+
+  getShareableUrl = () => {
+    let movieIds = "";
+    const { right } = this.state;
+    _.forEach(right, (movie) => {
+      movieIds = movieIds + `,${movie.imdbID}`;
+    });
+    const shareableUrlParam = `?movieIds=${movieIds.substring(1)}`;
+
+    console.log(shareableUrlParam);
+    return shareableUrlParam;
   };
 
   customList = (items, title) => {
@@ -156,6 +171,8 @@ class TransferList extends React.Component {
     const { classes, leftTitle, rightTitle, maxNomSize = 5 } = this.props;
     const leftChecked = this.leftChecked();
 
+    console.log(right);
+
     return (
       <Grid
         container
@@ -193,6 +210,7 @@ class TransferList extends React.Component {
           </Grid>
         </Grid>
         <Grid item>{this.customList(right, rightTitle)}</Grid>
+        <Button onClick={this.getShareableUrl}> SHARE</Button>
       </Grid>
     );
   }

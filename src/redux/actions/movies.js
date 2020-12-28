@@ -23,7 +23,7 @@ export const fetchMoviesByTitle = (title) => {
 export const fetchMoviesByTitleAndYear = (title, year) => {
   return function (dispatch) {
     request
-      .get(request.get(`?s=${title}&y=${year}`))
+      .get(`?s=${title}&y=${year}`)
       .then((data) =>
         dispatch({
           type: actionTypes.movies.UPDATE,
