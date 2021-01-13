@@ -1,26 +1,23 @@
 import React from "react";
-import _ from "lodash";
 import {
   Grid,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
-  Checkbox,
   Button,
   Paper,
   withStyles,
   Box,
   Typography,
 } from "@material-ui/core/";
+import Row from "./Row.jsx";
 
 const styles = {
   root: {
     margin: "auto",
   },
   paper: {
-    width: "300px",
-    height: "400px",
+    width: "500px",
+    height: "800px",
     overflow: "auto",
   },
   button: {
@@ -128,27 +125,13 @@ class TransferList extends React.Component {
         <Paper className={classes.paper}>
           <List dense component="div" role="list">
             {items.map((movie, i) => {
-              const labelId = `transfer-list-item-${movie}-label`;
               return (
-                <ListItem
+                <Row
+                  movie={movie}
                   key={i}
-                  role="listitem"
-                  button
-                  onClick={this.handleToggle(movie)}
-                >
-                  <ListItemIcon>
-                    <Checkbox
-                      checked={checked.indexOf(movie) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText
-                    id={labelId}
-                    primary={`${movie.Title} (${movie.Year})`}
-                  />
-                </ListItem>
+                  checked={checked}
+                  onClick={this.handleToggle}
+                />
               );
             })}
             <ListItem />

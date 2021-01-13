@@ -1,13 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import {
-  Grid,
-  withStyles,
-  Box,
-  Button,
-  TextField,
-  Snackbar,
-} from "@material-ui/core/";
+import { Grid, withStyles, Box, Button, Snackbar } from "@material-ui/core/";
 import { connect } from "react-redux";
 
 import TransferList from "../components/styled/TransferList";
