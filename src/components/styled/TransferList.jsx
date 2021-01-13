@@ -17,7 +17,7 @@ const styles = {
   },
   paper: {
     width: "500px",
-    height: "800px",
+    height: "500px",
     overflow: "auto",
   },
   button: {
