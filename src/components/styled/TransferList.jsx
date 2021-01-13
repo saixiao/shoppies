@@ -109,18 +109,6 @@ class TransferList extends React.Component {
     this.setState({ checked: newChecked });
   };
 
-  getShareableUrl = () => {
-    let movieIds = "";
-    const { right } = this.state;
-    _.forEach(right, (movie) => {
-      movieIds = movieIds + `,${movie.imdbID}`;
-    });
-    const shareableUrlParam = `?movieIds=${movieIds.substring(1)}`;
-
-    console.log(shareableUrlParam);
-    return shareableUrlParam;
-  };
-
   customList = (items, title) => {
     const { checked } = this.state;
     const { classes } = this.props;
@@ -171,8 +159,6 @@ class TransferList extends React.Component {
     const { classes, leftTitle, rightTitle, maxNomSize = 5 } = this.props;
     const leftChecked = this.leftChecked();
 
-    console.log(right);
-
     return (
       <Grid
         container
@@ -210,7 +196,6 @@ class TransferList extends React.Component {
           </Grid>
         </Grid>
         <Grid item>{this.customList(right, rightTitle)}</Grid>
-        <Button onClick={this.getShareableUrl}> SHARE</Button>
       </Grid>
     );
   }
