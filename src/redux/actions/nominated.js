@@ -19,3 +19,10 @@ export const fetchMoviesSharableLink = (imdbID) => {
       );
   };
 };
+
+export const updateNominatedList = (nominated) => {
+  return {
+    type: actionTypes.nominated.NEW,
+    payload: nominated,
+  };
+};

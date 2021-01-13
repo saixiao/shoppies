@@ -8,6 +8,8 @@ const nominatedReducer = ($$state = [], action) => {
   switch (type) {
     case actionTypes.nominated.UPDATE:
       return [...$$state, payload];
+    case actionTypes.nominated.NEW:
+      return payload;
     case actionTypes.nominated.SHOW:
     default:
       return $$state;

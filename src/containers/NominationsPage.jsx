@@ -72,7 +72,6 @@ class NominationsPage extends React.Component {
   render() {
     const { classes, movies, nominated } = this.props;
     const { clipboardOpen, openSnackBar } = this.state;
-
     return (
       <Grid>
         <AppBar title="Shoppies" onSearch={this.onSearch} />
@@ -82,6 +81,7 @@ class NominationsPage extends React.Component {
             leftTitle="Searches for..."
             left={movies}
             right={nominated}
+            updateNominatedList={this.props.updateNominatedList}
           />
         </Box>
 

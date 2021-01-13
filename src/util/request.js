@@ -35,7 +35,7 @@ export const request = (method) => (query, options = {}) => {
     });
 };
 
-// Realistically we will only use get
+// Realistically we will only use GET
 export default _.chain(["get", "post", "delete", "patch", "put"])
   .map((method) => [method, request(_.toUpper(method))])
   .fromPairs()
