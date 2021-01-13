@@ -16,6 +16,22 @@ const styles = {
   },
 };
 
+function filterMovies(movies, nominations) {
+  const ids = {};
+  const filteredList = [];
+  _.forEach(nominations, (nom) => {
+    ids[nom.imdbID] = true;
+  });
+
+  _.forEach(movies, (movie) => {
+    if (!ids[movie.imdbID]) {
+      filteredList.push(movie);
+    }
+  });
+
+  return filteredList;
+}
+
 class NominationsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -65,6 +81,9 @@ class NominationsPage extends React.Component {
   render() {
     const { classes, movies, nominated } = this.props;
     const { clipboardOpen, openSnackBar } = this.state;
+
+    const filteredMovies = filterMovies(movies, nominated);
+
     return (
       <Grid>
         <AppBar title="Shoppies" onSearch={this.onSearch} />
@@ -72,7 +91,7 @@ class NominationsPage extends React.Component {
           <TransferList
             rightTitle="Nominations"
             leftTitle="Searches for..."
-            left={movies}
+            left={filteredMovies}
             right={nominated}
             updateNominatedList={this.props.updateNominatedList}
           />

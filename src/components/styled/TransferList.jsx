@@ -57,7 +57,8 @@ class TransferList extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.left !== this.props.left) {
       this.setState({ left: this.props.left });
-    } else if (prevProps.right !== this.props.right) {
+    }
+    if (prevProps.right !== this.props.right) {
       this.setState({ right: this.props.right });
     }
   }

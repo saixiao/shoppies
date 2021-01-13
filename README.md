@@ -1,2 +1,1 @@
-# shoppies
-shopify FE challenge 
+2021 Shopify FE Challenge
