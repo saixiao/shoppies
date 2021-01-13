@@ -2,7 +2,7 @@ import _ from "lodash";
 import axios from "axios";
 import qs from "qs";
 
-const baseUrl = "http://www.omdbapi.com";
+const baseUrl = "https://www.omdbapi.com";
 
 const apiKey = "&apikey=29dc1524";
 
