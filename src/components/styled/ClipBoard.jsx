@@ -34,7 +34,7 @@ export default function ClipBoard(props) {
       <DialogContent dividers className={classes.dialogContent}>
         <TextField
           className={classes.dialogContent}
-          defaultValue={`${window.location.host}/${url}`}
+          defaultValue={`${window.location.host}/shoppies/${url}`}
           disabled={inputDisabled}
         />
       </DialogContent>
