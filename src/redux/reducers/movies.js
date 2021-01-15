@@ -8,6 +8,8 @@ const movieReducer = ($$state = [], action) => {
     case actionTypes.movies.UPDATE:
       return _.get(payload, "Search");
     case actionTypes.movies.SHOW:
+    case actionTypes.movies.NEW:
+      return payload;
     default:
       return $$state;
   }

@@ -38,3 +38,10 @@ export const fetchMoviesByTitleAndYear = (title, year) => {
       );
   };
 };
+
+export const updateMovieList = (movies) => {
+  return {
+    type: actionTypes.movies.NEW,
+    payload: movies,
+  };
+};
