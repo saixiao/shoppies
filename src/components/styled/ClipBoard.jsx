@@ -39,7 +39,8 @@ export default function ClipBoard(props) {
         />
       </DialogContent>
       <DialogActions>
-        <CopyToClipboard text={`${window.location.host}/${url}`}>
+        {/* hack since github pages doesnt have branch base url */}
+        <CopyToClipboard text={`${window.location.host}/shoppies/${url}`}>
           <Button
             autoFocus
             onClick={() => {
